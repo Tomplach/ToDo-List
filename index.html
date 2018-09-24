@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List by Tubaris</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Helvetica, sans-serif;
+            background-color: rgb(238, 238, 238);
+        }
+
+        header {
+            background-color: rebeccapurple;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header>div {
+            height: 50px;
+            width: 250px;
+            position: relative;
+        }
+
+        input {
+            position: absolute;
+            top: 0;
+            height: 30px;
+            margin: 10px -205px 0 0;
+            outline: none;
+            border: none;
+            border-radius: 15px;
+            text-indent: 15px;
+            background-color: rgba(255, 255, 255, 0.548);
+            box-shadow: inset 1px -1px 10px #aaa;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 0 50px 0 0;
+        }
+
+        input::placeholder {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.534);
+            font-weight: lighter;
+        }
+        
+        div>button {
+            display: inline-block;
+            position: absolute;
+            top: 10px;
+            right: 0;
+            height: 30px;
+            width: 50px;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border: none;
+            line-height: 14px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.534);
+            background-color: rgb(75, 32, 119);
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            padding: 0;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            background-color: rgba(102, 51, 153, 0.2);
+        }
+
+        .delete-button:before {
+            position: absolute;
+            content: "X";
+            top: 7px;
+            right: 9px;
+            font-size: 10px;
+            font-weight: bold;
+            color: rebeccapurple;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        .todo-item {
+            position: relative;
+            margin: 5px;
+            padding: 5px 10px;
+            line-height: 22px;
+            border: 1px solid rgb(199, 199, 199);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <input type="text" placeholder="Dodaj zadanie..." id="todoInput">
+            <button id="addBtn">Add</button>
+        </div>
+    </header>
+    <div>
+        <ul id="todoList">
+
+        </ul>
+    </div>
+    </section>
+
+    <script>
+
+        let todoArray = [];
+        
+        document.getElementById("addBtn").addEventListener('click', function () {
+            let todoList = document.getElementById("todoList");
+            let inputText = document.getElementById("todoInput").value;
+            let newElem = document.createElement("li");
+            let newText = document.createTextNode(inputText);
+            let newBtn = document.createElement("button");
+            let txtBtn = document.createTextNode("Delete");
+            if (!inputText) {
+                return;
+            }
+            newElem.appendChild(newText);
+            newElem.appendChild(newBtn);
+            newElem.classList.add("todo-item");
+            newBtn.classList.add("delete-button");
+            todoList.appendChild(newElem);
+            todoList.insertBefore(newElem, todoList.childNodes[0]);
+            todoArray.push(inputText);
+            document.getElementById("todoInput").value = '';
+            newBtn.onclick = function() {
+                var item = this.parentNode;
+                item.remove();
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
